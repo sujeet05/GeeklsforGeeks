@@ -6,4 +6,5 @@ Test if Binary tree is BST
 Print BST keys in given range
 remove the key outside the range
 Check if each internal node of a BST has exactly one child
-
+Find k-th smallest element in BST (Order Statistics in BST)
+Find k-th highest element in BST (Order Statistics in BST)

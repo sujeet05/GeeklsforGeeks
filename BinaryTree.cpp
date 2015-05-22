@@ -55,7 +55,15 @@ void inorder(struct node *btree)
 		inorder(btree->right);
 	}
 }
-
+void reverse_inorder(struct node *btree)
+{
+	if(btree)
+	{
+		reverse_inorder(btree->right);
+		cout << btree->data << "...";
+		reverse_inorder(btree->left);
+	}
+}
 void preorder(struct node *btree)
 {
 	if(btree)
@@ -272,6 +280,43 @@ int lca_validation(struct node *btree,int key1,int key2)
 		struct node *f2 = findelement_subtree(root,key2);
 		return (f1 && f2) ? root->data : -1;
 }
+void traversal_for_kthsmallest(struct node* btree,int k,int &c)
+{
+	if(!btree || c >= k)
+		return;
+	traversal_for_kthsmallest(btree->left,k,c);
+	c++;
+	if(k==c)
+	{	
+		cout << "kth smallest element:" << btree->data << endl;
+		return;
+	}
+	traversal_for_kthsmallest(btree->right,k,c);
+}
+void find_kthsmallestelement(struct node *btree,int k)
+{
+	int c=0;
+	traversal_for_kthsmallest(btree,k,c);
+}
+
+void traversal_for_kthlargest(struct node* btree,int k,int &c)
+{
+	if(!btree || c >= k)
+		return;
+	traversal_for_kthlargest(btree->right,k,c);
+	c++;
+	if(k==c)
+	{	
+		cout << "kth largest element:" << btree->data << endl;
+		return;
+	}
+	traversal_for_kthlargest(btree->left,k,c);
+}
+void find_kthlargestelement(struct node *btree,int k)
+{
+	int c=0;
+	traversal_for_kthlargest(btree,k,c);
+}
 int main()
 {
 	insert2(&root,20);
@@ -281,6 +326,11 @@ int main()
 	insert2(&root,12);
 	insert2(&root,10);
 	insert2(&root,14);
+	find_kthsmallestelement(root,3);
+	find_kthsmallestelement(root,5);
+	find_kthlargestelement(root,3);
+	find_kthlargestelement(root,5);
+	reverse_inorder(root);
 	cout << "Least common incesstor 4 and 12 :" << Least_common_incesstor(root,4,12) << endl;
 	cout <<  "Least common incesstor 14 and 20 :" << Least_common_incesstor(root,14,20) << endl;
 	cout << "Least common incesstor 14 and 10 :" << Least_common_incesstor(root,14,10) << endl;
