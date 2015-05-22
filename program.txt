@@ -8,3 +8,4 @@ remove the key outside the range
 Check if each internal node of a BST has exactly one child
 Find k-th smallest element in BST (Order Statistics in BST)
 Find k-th highest element in BST (Order Statistics in BST)
+Transform a BST to greater sum tree
