@@ -3,3 +3,7 @@ Find the loop in singlelinklist
 check list is palindronme 
 LCA - least common ancesstor
 Test if Binary tree is BST
+Print BST keys in given range
+remove the key outside the range
+Check if each internal node of a BST has exactly one child
+
