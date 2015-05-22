@@ -1,3 +1,5 @@
 Reverse the singlelist using iterative and recursive method
 Find the loop in singlelinklist
 check list is palindronme 
+LCA - least common ancesstor
+Test if Binary tree is BST
