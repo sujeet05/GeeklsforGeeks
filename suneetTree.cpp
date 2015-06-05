@@ -1,7 +1,8 @@
 #include<iostream>
 #include<stack>
 #include<algorithm>
-#include <vector>
+#include <limits.h>
+
 using namespace std;
 
 struct node 
@@ -55,7 +56,15 @@ void inorder(struct node *btree)
 		inorder(btree->right);
 	}
 }
-
+void reverse_inorder(struct node *btree)
+{
+	if(btree)
+	{
+		reverse_inorder(btree->right);
+		cout << btree->data << "...";
+		reverse_inorder(btree->left);
+	}
+}
 void preorder(struct node *btree)
 {
 	if(btree)
@@ -272,45 +281,123 @@ int lca_validation(struct node *btree,int key1,int key2)
 		struct node *f2 = findelement_subtree(root,key2);
 		return (f1 && f2) ? root->data : -1;
 }
-int count_nodes( struct node* btree)
+void traversal_for_kthsmallest(struct node* btree,int k,int &c)
 {
-		return (btree)? count_nodes(btree->left)+count_nodes(btree->right)+1:0;
-}
-bool validate_one_child(struct node *btree)
-{
-	int count=count_nodes(btree);;
-	while(btree)
-	{
-	   count--;
-	   btree = (btree->left) ? btree->left : btree->right;
+	if(!btree || c >= k)
+		return;
+	traversal_for_kthsmallest(btree->left,k,c);
+	c++;
+	if(k==c)
+	{	
+		cout << "kth smallest element:" << btree->data << endl;
+		return;
 	}
-	return count==0 ? true: false;
+	traversal_for_kthsmallest(btree->right,k,c);
 }
-bool check_one_child(vector<int> v)
+void find_kthsmallestelement(struct node *btree,int k)
 {
-		for(int i=0;i<v.size()-2;i++)
-			if((v[i]-v[i+1])*(v[i]-v[i+2])<0)
-			  return false;
-	return true;
+	int c=0;
+	traversal_for_kthsmallest(btree,k,c);
+}
+
+void traversal_for_kthlargest(struct node* btree,int k,int &c)
+{
+	if(!btree || c >= k)
+		return;
+	traversal_for_kthlargest(btree->right,k,c);
+	c++;
+	if(k==c)
+	{	
+		cout << "kth largest element:" << btree->data << endl;
+		return;
+	}
+	traversal_for_kthlargest(btree->left,k,c);
+}
+void find_kthlargestelement(struct node *btree,int k)
+{
+	int c=0;
+	traversal_for_kthlargest(btree,k,c);
+}
+
+bool isBST(struct node* p, int min, int max)
+{
+		if(p)
+		{
+				return isBST(p->left, min, p->data)
+						&& isBST(p->right, p->data, max)
+						&& p->data >= min && p->data <= max;
+		}
+		else return true;
 }
 int main()
 {
-	insert2(&root,20);
-	insert2(&root,22);
-	insert2(&root,24);
-	insert2(&root,18);
-	insert2(&root,19);
 	insert2(&root,11);
+//	insert2(&root,2);
+//	insert2(&root,14);
+//	insert2(&root,1);
+//	insert2(&root,7);
+//	insert2(&root,15);
+//	insert2(&root,5);
+//	insert2(&root,8);
+//	insert2(&root,4);
+//	root->left->left->left = newnode(10);
+#if 0
+	find_kthsmallestelement(root,3);
+	find_kthsmallestelement(root,5);
+	find_kthlargestelement(root,3);
+	find_kthlargestelement(root,5);
+	reverse_inorder(root);
+	cout << "Least common incesstor 4 and 12 :" << Least_common_incesstor(root,4,12) << endl;
+	cout <<  "Least common incesstor 14 and 20 :" << Least_common_incesstor(root,14,20) << endl;
+	cout << "Least common incesstor 14 and 10 :" << Least_common_incesstor(root,14,10) << endl;
+	cout << "Least common incesstor 22 and 12 :" << Least_common_incesstor(root,22,12) << endl;
+	cout << "Least common incesstor 20 and 12 :" << Least_common_incesstor(root,20,12) << endl;
+	cout << "Least common incesstor 6 and 12 :" << Least_common_incesstor(root,6,12) << endl;
+	cout << "Least common incesstor 6 and 8 :" << Least_common_incesstor(root,6,8) << endl;
+	cout << "second method for lca testing .. " << endl;
+	cout << "Least common incesstor 4 and 12 :" << lca_validation(root,4,12) << endl;
+	cout <<  "Least common incesstor 14 and 20 :" << lca_validation(root,14,20) << endl;
+	cout << "Least common incesstor 14 and 10 :" << lca_validation(root,14,10) << endl;
+	cout << "Least common incesstor 22 and 12 :" << lca_validation(root,22,12) << endl;
+	cout << "Least common incesstor 20 and 12 :" << lca_validation(root,20,12) << endl;
+	cout << "Least common incesstor 6 and 12 :" << lca_validation(root,6,12) << endl;
+	cout << "Least common incesstor 6 and 8 :" << lca_validation(root,6,8) << endl;
+#if 0
+	insert2(&root,15);
+	insert2(&root,6);
+	insert2(&root,3);
+	insert2(&root,2);
+	insert2(&root,4);
+	insert2(&root,7);
 	insert2(&root,13);
-	insert2(&root,12);
-	cout << count_nodes(root) << endl;
+	insert2(&root,9);
+	insert2(&root,18);
+	insert2(&root,17);
+	insert2(&root,20);
+#endif
+#if 0	
+	insert(15);
+	insert(6);
+	insert(3);
+	insert(2);
+	insert(4);
+	insert(7);
+	insert(13);
+	insert(9);
+	insert(18);
+	insert(17);
+	insert(20);
+#endif 
+	cout << "Inorder Traversal Alternate... " << endl;
+	inorder_alternate(root,11);
 	cout << "Inorder Traversal... " << endl;
 	inorder(root);
+	cout << "Prerder Traversal... " << endl;
+	preorder(root);
+	cout << "Postorder Traversal... " << endl;
+	postorder(root);
 	cout << endl;
-	bool x = true;
-	cout << x<<endl;
-    //cout<<validate_one_child(root);
-	vector<int >v= {20, 10, 11, 13, 12};
-	cout << "check one child ..." << check_one_child(v)<< endl;
+#endif
+	cout << isBST(root, INT_MIN, INT_MAX) << endl;
 	return 0;
 }

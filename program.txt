@@ -9,3 +9,7 @@ Check if each internal node of a BST has exactly one child
 Find k-th smallest element in BST (Order Statistics in BST)
 Find k-th highest element in BST (Order Statistics in BST)
 Transform a BST to greater sum tree
+find a pair with given sum in a Balanced BST
+Heap utility
+Heap sort
+print k larset and smallest element in array- using Max and Min Heap check prog 9 and 10 also which is in BST
