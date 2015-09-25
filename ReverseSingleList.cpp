@@ -106,7 +106,8 @@ void reverse(struct node **list)
 
 			}
 			*list = _previous;
-#if 0 same logic above in more elagant manner
+#if 0
+		   	same logic above in more elagant manner
 			struct node *_next = _current->next;
 			while(_next)
 			{
@@ -134,6 +135,7 @@ int main()
 		  cout << "Enter 4 for Remove " << endl;
 		  cout << "Enter 5 for show " << endl;
 		  cout << "Enter 6 for Reverse " << endl;
+		  cout << "Enter 7 for Reverse with count " << endl;
 		  cout << "Enter 10 for Exit " << endl;
 		  cin >> option;
 		  switch(option)
@@ -165,6 +167,22 @@ int main()
 				  head= reverse_recursive(&head);
 				  display();
 				break;
+			case 7:
+				 int n;
+				insertBegining(head,10);
+				insertBegining(head,20);
+				insertBegining(head,30);
+				insertBegining(head,40);
+				insertBegining(head,50);
+				insertBegining(head,60);
+				insertBegining(head,70);
+				insertBegining(head,80);
+				insertBegining(head,90);
+				 display();
+				 cin >> n;
+				  reverse_recursive_count(&head,n,true);
+				 display();
+				 break;
 			case 10:
 				cout << "Thank you: " << endl;
 				 exit(0);
